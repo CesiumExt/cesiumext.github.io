@@ -1,2 +1,2 @@
 # cesiumext.github.io
-CesiumExt Web Site
+CesiumExt Web Page
