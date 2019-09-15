@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='CesiumExt-ogc-format-filter-Comparison'>/**
+</span> * @class
+ * Abstract class; normally only used for creating subclasses and not instantiated in apps.
+ * Base class for WFS GetFeature property comparison filters.
+ * @extends {CesiumExt.ogc.format.filter.Filter}
+ */
+Ext.define('CesiumExt.ogc.format.filter.Comparison', {
+    extend:'CesiumExt.ogc.format.filter.Filter',
+<span id='CesiumExt-ogc-format-filter-Comparison-property-propertyName'>	propertyName: null,
+</span>	
+<span id='CesiumExt-ogc-format-filter-Comparison-method-constructor'>	/**
+</span>	* @constructor
+	* @abstract
+	* @param {!string} tagName The XML tag name for this filter.
+	* @param {!string} propertyName Name of the context property to compare.
+	*/
+	constructor: function(tagName, propertyName) {
+		this.callParent([tagName]);
+		this.propertyName = propertyName;
+    },
+	
+});
+
+</pre>
+</body>
+</html>

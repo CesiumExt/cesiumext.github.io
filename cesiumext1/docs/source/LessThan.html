@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='CesiumExt-ogc-format-filter-LessThan'>/**
+</span> * presents a `&lt;PropertyIsLessThan&gt;` comparison operator.
+ * @class CesiumExt.ogc.format.filter.LessThan
+ * @extends {CesiumExt.ogc.format.filter.ComparisonBinary}
+ */
+Ext.define('CesiumExt.ogc.format.filter.LessThan', {
+    extend:'CesiumExt.ogc.format.filter.ComparisonBinary',
+
+	
+<span id='CesiumExt-ogc-format-filter-LessThan-method-constructor'>	/**
+</span>	* @constructor
+	* @param {!string} propertyName Name of the context property to compare.
+	* @param {!number} expression The value to compare.
+	*/
+	constructor: function(propertyName, expression) {
+		this.callParent(['PropertyIsLessThan', propertyName, expression]);
+    },
+});
+
+</pre>
+</body>
+</html>

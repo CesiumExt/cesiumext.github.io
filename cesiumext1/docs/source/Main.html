@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='CesiumExt-view-main-Main'>/**
+</span> * This class is the main view for the application. It is specified in app.js as the
+ * &quot;mainView&quot; property. That setting automatically applies the &quot;viewport&quot;
+ * plugin causing this view to become the body element (i.e., the viewport).
+ *
+ * TODO - Replace this content of this view to suite the needs of your application.
+ */
+Ext.define('CesiumExt.view.main.Main', {
+    extend: 'Ext.tab.Panel',
+    xtype: 'app-main',
+
+    requires: [
+        'Ext.plugin.Viewport',
+        'Ext.window.MessageBox',
+
+        'CesiumExt.view.main.MainController',
+        'CesiumExt.view.main.MainModel',
+        'CesiumExt.view.main.List'
+    ],
+
+<span id='CesiumExt-view-main-Main-property-controller'>    controller: 'main',
+</span><span id='CesiumExt-view-main-Main-property-viewModel'>    viewModel: 'main',
+</span>
+<span id='CesiumExt-view-main-Main-property-ui'>    ui: 'navigation',
+</span>
+<span id='CesiumExt-view-main-Main-property-tabBarHeaderPosition'>    tabBarHeaderPosition: 1,
+</span><span id='CesiumExt-view-main-Main-property-titleRotation'>    titleRotation: 0,
+</span><span id='CesiumExt-view-main-Main-property-tabRotation'>    tabRotation: 0,
+</span>
+<span id='CesiumExt-view-main-Main-property-header'>    header: {
+</span>        layout: {
+            align: 'stretchmax'
+        },
+        title: {
+            bind: {
+                text: '{name}'
+            },
+            flex: 0
+        },
+        iconCls: 'fa-th-list'
+    },
+
+<span id='CesiumExt-view-main-Main-property-tabBar'>    tabBar: {
+</span>        flex: 1,
+        layout: {
+            align: 'stretch',
+            overflowHandler: 'none'
+        }
+    },
+
+<span id='CesiumExt-view-main-Main-property-responsiveConfig'>    responsiveConfig: {
+</span>        tall: {
+            headerPosition: 'top'
+        },
+        wide: {
+            headerPosition: 'left'
+        }
+    },
+
+<span id='CesiumExt-view-main-Main-property-defaults'>    defaults: {
+</span>        bodyPadding: 20,
+        tabConfig: {
+            responsiveConfig: {
+                wide: {
+                    iconAlign: 'left',
+                    textAlign: 'left'
+                },
+                tall: {
+                    iconAlign: 'top',
+                    textAlign: 'center',
+                    width: 120
+                }
+            }
+        }
+    },
+
+<span id='CesiumExt-view-main-Main-property-items'>    items: [{
+</span>        title: 'Home',
+        iconCls: 'fa-home',
+        // The following grid shares a store with the classic version's grid as well!
+        items: [{
+            xtype: 'mainlist'
+        }]
+    }, {
+        title: 'Users',
+        iconCls: 'fa-user',
+        bind: {
+            html: '{loremIpsum}'
+        }
+    }, {
+        title: 'Groups',
+        iconCls: 'fa-users',
+        bind: {
+            html: '{loremIpsum}'
+        }
+    }, {
+        title: 'Settings',
+        iconCls: 'fa-cog',
+        bind: {
+            html: '{loremIpsum}'
+        }
+    }]
+});
+</pre>
+</body>
+</html>

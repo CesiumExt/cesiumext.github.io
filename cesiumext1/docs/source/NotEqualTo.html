@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='CesiumExt-ogc-format-filter-NotEqualTo'>/**
+</span> * @class
+ * Represents a `&lt;PropertyIsNotEqualTo&gt;` comparison operator.
+ * @extends {CesiumExt.ogc.format.filter.ComparisonBinary}
+ */
+Ext.define('CesiumExt.ogc.format.filter.NotEqualTo', {
+    extend:'CesiumExt.ogc.format.filter.ComparisonBinary',
+
+	
+<span id='CesiumExt-ogc-format-filter-NotEqualTo-method-constructor'>	/**
+</span>	* @constructor
+	* @param {!string} propertyName Name of the context property to compare.
+	* @param {!(string|number)} expression The value to compare.
+	* @param {boolean=} opt_matchCase Case-sensitive?
+	*/
+	constructor: function(propertyName, expression, opt_matchCase) {
+		this.callParent(['PropertyIsNotEqualTo', propertyName, expression, opt_matchCase]);
+    },
+});
+
+</pre>
+</body>
+</html>
