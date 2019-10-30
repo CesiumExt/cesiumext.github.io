@@ -15,26 +15,65 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js"><span id='CesiumExt-ogc-format-filter-NotEqualTo'>/**
-</span> * @class
- * Represents a `&lt;PropertyIsNotEqualTo&gt;` comparison operator.
- * @extends {CesiumExt.ogc.format.filter.ComparisonBinary}
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019-Present CesiumExtJS
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-Ext.define('CesiumExt.ogc.format.filter.NotEqualTo', {
-    extend:'CesiumExt.ogc.format.filter.ComparisonBinary',
+
+<span id='CesiumExt-format-filter-NotEqualTo'>/**
+</span> * Represents a `&lt;PropertyIsNotEqualTo&gt;` binary comparison operator.
+ *
+ * @class CesiumExt.format.filter.NotEqualTo
+ * @author Paulo Sergio SAMPAIO de ARAGAO
+ */
+Ext.define('CesiumExt.format.filter.NotEqualTo', {
+    extend:'CesiumExt.format.filter.ComparisonBinary',
 
 	
-<span id='CesiumExt-ogc-format-filter-NotEqualTo-method-constructor'>	/**
-</span>	* @constructor
-	* @param {!string} propertyName Name of the context property to compare.
-	* @param {!(string|number)} expression The value to compare.
-	* @param {boolean=} opt_matchCase Case-sensitive?
-	*/
-	constructor: function(propertyName, expression, opt_matchCase) {
-		this.callParent(['PropertyIsNotEqualTo', propertyName, expression, opt_matchCase]);
+<span id='CesiumExt-format-filter-NotEqualTo-method-constructor'>	/**
+</span>	 * The constructor method.
+	 *
+	 * @param {String} propertyName Name of the context property to compare.
+	 * @param {String | number} expression The value to compare.
+	 * @param {Boolean} matchCase Case-sensitive?
+	 */
+	
+	constructor: function(config) {
+		var me = this;
+		config = config || {};
+		config.tagName = 'PropertyIsNotEqualTo';
+		me.callParent([config]);
+		me.initConfig(config);
     },
-});
-
-</pre>
+	
+	statics: {
+<span id='CesiumExt-format-filter-NotEqualTo-static-property-TPL'>		TPL: 
+</span>			'&lt;{0}&gt;' + 
+				'&lt;PropertyName&gt;{1}&lt;/PropertyName&gt;' +
+				'&lt;Literal&gt;{2}&lt;/Literal&gt;' +
+			'&lt;/{0}&gt;'
+	},
+	
+<span id='CesiumExt-format-filter-NotEqualTo-method-toString'>	toString: function(){
+</span>		var me = this;
+		return Ext.String.format(
+			CesiumExt.format.filter.NotEqualTo.TPL,
+			this.getTagName(),
+			this.getPropertyName(),
+			this.getExpression()
+		);
+	}
+});</pre>
 </body>
 </html>

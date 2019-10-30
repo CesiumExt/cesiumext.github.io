@@ -15,29 +15,47 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js"><span id='CesiumExt-ogc-format-filter-During'>/**
-</span> * @class
- * Represents a `&lt;During&gt;` comparison operator.
- * @extends {CesiumExt.ogc.format.filter.Comparison}
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019-Present CesiumExtJS
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-Ext.define('CesiumExt.ogc.format.filter.During', {
-    extend:'CesiumExt.ogc.format.filter.Comparison',
+
+<span id='CesiumExt-format-filter-During'>/**
+</span> * Represents a `&lt;During&gt;` comparison operator.
+ *
+ * @class CesiumExt.format.filter.During
+ * @author Paulo Sergio SAMPAIO de ARAGAO
+ */
+Ext.define('CesiumExt.format.filter.During', {
+    extend:'CesiumExt.format.filter.Comparison',
 	
-<span id='CesiumExt-ogc-format-filter-During-property-begin'>  /**
-</span>   * @type {!string}
-   */
+	
+<span id='CesiumExt-format-filter-During-property-begin'>	/**
+</span>	 * @type {String}
+	*/
 	begin: null,
 	
-<span id='CesiumExt-ogc-format-filter-During-property-end'>  /**
-</span>   * @type {!string}
-   */
+<span id='CesiumExt-format-filter-During-property-end'>	/**
+</span>     * @type {String}
+	*/
 	end: null,
 	
-<span id='CesiumExt-ogc-format-filter-During-method-constructor'>	/**
+<span id='CesiumExt-format-filter-During-method-constructor'>	/**
 </span>	* @constructor
-	* @param {!string} propertyName Name of the context property to compare.
-	* @param {!string} begin The begin date in ISO-8601 format.
-	* @param {!string} end The end date in ISO-8601 format.
+	* @param {String} propertyName Name of the context property to compare.
+	* @param {String} begin The begin date in ISO-8601 format.
+	* @param {String} end The end date in ISO-8601 format.
 	*/
 	constructor: function(propertyName, begin, end) {
 		this.callParent(['During', propertyName]);

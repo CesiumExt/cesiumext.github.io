@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019-Present CesiumExtJS
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+
+<span id='CesiumExt-format-filter-BBox'>/**
+</span> * Base for WFS GetFeature property BBox filter.
+ *
+ * @class CesiumExt.format.filter.BBox
+ * @author Paulo Sergio SAMPAIO de ARAGAO
+ */
+Ext.define('CesiumExt.format.filter.BBox', {
+    extend:'CesiumExt.format.filter.AbstractFilter',
+	requires: [
+		'CesiumExt.format.WFSRequest'
+	],
+	config: {
+<span id='CesiumExt-format-filter-BBox-cfg-geometryName'>		/**
+</span>		* The xml geometry name
+		* @cfg {String} geometryName
+		*/
+		geometryName: 'geometry',
+		
+<span id='CesiumExt-format-filter-BBox-cfg-extent'>		/**
+</span>		* The bbox extents (in radians)
+		* @cfg {Cesium.Rectangle} extent
+		*/
+		extent: null,
+		
+<span id='CesiumExt-format-filter-BBox-cfg-srsName'>		/**
+</span>		* The srs name
+		* @cfg {String} srsName
+		*/
+		srsName: 'EPSG:4326'
+	},
+	
+	statics: {
+<span id='CesiumExt-format-filter-BBox-static-property-TPL'>		TPL: 
+</span>			'&lt;{0}&gt;' + 
+				'&lt;PropertyName&gt;{1}&lt;/PropertyName&gt;' +
+				'&lt;Envelope xmlns=&quot;{2}&quot; srsName=&quot;{3}&quot;&gt;' +
+					'&lt;lowerCorner&gt;{4} {5}&lt;/lowerCorner&gt;' +
+					'&lt;upperCorner&gt;{6} {7}&lt;/upperCorner&gt;' +
+				'&lt;/Envelope&gt;' +
+			'&lt;/{0}&gt;'
+		
+	},
+	
+<span id='CesiumExt-format-filter-BBox-method-constructor'>	/**
+</span>	* Constructor method
+	* @param {String} tagName The XML tag name for this filter.
+	* @param {String} propertyName Name of the context property to compare.
+	*/
+	constructor: function(config) {
+		var me = this;
+		config = config || {};
+		config.tagName = 'BBOX';
+		me.callParent([config]);
+		me.initConfig(config);
+    },
+	
+<span id='CesiumExt-format-filter-BBox-method-toString'>	toString: function() {
+</span>		var me = this;
+		return Ext.String.format(
+			CesiumExt.format.filter.BBox.TPL,
+			me.getTagName(),
+			me.getGeometryName().toString(),
+			CesiumExt.format.WFSRequest.GMLNS,
+			me.getSrsName(),
+			Cesium.Math.toDegrees(me.getExtent().west),
+			Cesium.Math.toDegrees(me.getExtent().south),
+			Cesium.Math.toDegrees(me.getExtent().east),
+			Cesium.Math.toDegrees(me.getExtent().north)
+		);
+	}
+});
+
+</pre>
+</body>
+</html>

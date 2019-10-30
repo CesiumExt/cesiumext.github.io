@@ -15,32 +15,73 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js"><span id='CesiumExt-ogc-format-filter-LogicalNary'>/**
-</span> * @class
- * Abstract class; normally only used for creating subclasses and not instantiated in apps.
- * Base class for WFS GetFeature n-ary logical filters.
- * @extends {CesiumExt.ogc.format.filter.Filter}
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019-Present CesiumExtJS
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-Ext.define('CesiumExt.ogc.format.filter.LogicalNary', {
-    extend: 'CesiumExt.ogc.format.filter.Filter',
+
+
+<span id='CesiumExt-format-filter-LogicalNary'>/**
+</span> * Abstract class; normally only used for creating subclasses and not instantiated in apps.
+ * Base class for OGC n-ary logical filters.
+ *
+ * @class CesiumExt.format.filter.LogicalNary
+ * @author Paulo Sergio SAMPAIO de ARAGAO
+ */
+Ext.define('CesiumExt.format.filter.LogicalNary', {
+    extend: 'CesiumExt.format.filter.AbstractFilter',
 	requires: [
         'Ext'
     ],
-<span id='CesiumExt-ogc-format-filter-LogicalNary-property-conditions'>	conditions: null,
-</span>	
-<span id='CesiumExt-ogc-format-filter-LogicalNary-method-constructor'>	/**
-</span>	* @constructor
-	* @param {!CesiumExt.ogc.format.filter.Filter} condition Filter condition.
+	
+	config: {
+<span id='CesiumExt-format-filter-LogicalNary-cfg-conditions'>		/**
+</span>		* The conditions for the n-ary logical operator
+		* @cfg {[CesiumExt.format.filter.AbstractFilter]} conditions
+		*/
+		conditions: null
+	},
+	
+<span id='CesiumExt-format-filter-LogicalNary-method-constructor'>	/**
+</span>	* The constructor method.
+	*
+	* @param {Object} config Configuration object with the 
+	*	array of conditions.
 	*/
-	constructor: function(tagName, conditions) {
-		this.callParent([tagName]);
-		this.conditions = Array.prototype.slice.call(arguments, 1);
-		if(this.conditions.length  &lt; 2) {
+	constructor: function(config) {
+		var me = this;
+		config = config || {};
+		if(!config.conditions || config.conditions.length &lt; 2)
 			Ext.raise('At least 2 conditions are required');
-		}
+		me.callParent([config]);
+		me.initConfig(config);
     },
+	
+<span id='CesiumExt-format-filter-LogicalNary-method-toString'>	/**
+</span>	* Returns the xml string of the filter
+	*/
+	toString: function() {
+		var me = this;
+		var parts = ['&lt;'+ me.getTagName() + '&gt;'];
+		for(var i = 0; i &lt; me.getConditions().length; ++i) {
+			var condition =  me.getConditions()[i];
+			parts.push(condition.toString());
+		}
+		parts.push('&lt;/'+ me.getTagName() + '&gt;');
+		return parts.join('');
+	}
 });
-
 </pre>
 </body>
 </html>

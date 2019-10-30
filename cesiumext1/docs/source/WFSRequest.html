@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019-Present CesiumExtJS
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+
+<span id='CesiumExt-format-WFSRequest'>/**
+</span> * Abstract Class that represents the WFS Request
+ *
+ * @class CesiumExt.format.WFSRequest
+ * @author Paulo Sergio SAMPAIO de ARAGAO
+ */
+Ext.define('CesiumExt.format.WFSRequest', {
+	extend: 'Ext.Base',
+	
+	inheritableStatics: {
+<span id='CesiumExt-format-WFSRequest-static-property-DEFAULT_VERSION'>		DEFAULT_VERSION: '1.1.0',
+</span><span id='CesiumExt-format-WFSRequest-static-property-OGCNS'>		OGCNS: 'http://www.opengis.net/ogc',
+</span><span id='CesiumExt-format-WFSRequest-static-property-WFSNS'>		WFSNS: 'http://www.opengis.net/wfs',
+</span><span id='CesiumExt-format-WFSRequest-static-property-FESNS'>		FESNS: 'http://www.opengis.net/fes',
+</span><span id='CesiumExt-format-WFSRequest-static-property-GMLNS'>		GMLNS: 'http://www.opengis.net/gml'
+</span>	},
+	
+<span id='CesiumExt-format-WFSRequest-method-constructor'>	constructor: function(config) {
+</span>		var me = this;
+		config = config || {};
+		me.callParent([config]);
+		me.initConfig(config);
+    }
+});</pre>
+</body>
+</html>

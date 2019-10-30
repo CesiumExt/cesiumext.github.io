@@ -42,6 +42,7 @@ Ext.define('CesiumExt.interaction.Interaction', {
 		var me = this;
         config = config || {};
 		me.callParent([config]);
+		me.initConfig(config);
 		this.mixins.observable.constructor.call(this, config);
     },
 	

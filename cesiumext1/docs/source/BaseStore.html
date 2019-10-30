@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019 CesiumExtJS
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+ 
+<span id='CesiumExt-data-store-BaseStore'>/**
+</span> * Abstract base class for the model.
+ *
+ * @class CesiumExt.data.store.BaseStore
+ *
+ * @author Paulo Sergio SAMPAIO de ARAGAO
+ */
+Ext.define('CesiumExt.data.store.BaseStore', {
+    extend: 'Ext.data.Store',
+    requires: [
+		'Ext.data.Store'
+    ],
+
+    mixins: [
+        
+    ],
+
+<span id='CesiumExt-data-store-BaseStore-property-symbols'>    // &lt;debug&gt;
+</span>    symbols: [
+	
+    ],
+    // &lt;/debug&gt;
+	
+<span id='CesiumExt-data-store-BaseStore-property-cesiumCollection'>	/**
+</span>     * The underlying Cesium Collection Object.
+	 *
+	 * @private
+     */
+    cesiumCollection: null,
+	
+<span id='CesiumExt-data-store-BaseStore-method-constructor'>	/**
+</span>     * Constructs a new instance of base store.
+     *
+     * @param {Object} config. The configuration object.
+     */
+    constructor: function(config, cesiumCollection) {
+		var me = this;
+        config = config || {};
+		me.cesiumCollection = cesiumCollection;
+		me.callParent([config]);
+    },
+	
+<span id='CesiumExt-data-store-BaseStore-method-bindStoreEvents'>	/**
+</span>     * An abstract utility method which binds change events fired FROM this store
+     *
+     * @private
+     */
+	bindStoreEvents: function() {
+		Ext.raise('CesiumExt.data.store.BaseStore.bindStoreEvents() must be implemented.');
+	},
+	
+<span id='CesiumExt-data-store-BaseStore-method-unbindStoreEvents'>	/**
+</span>     * An abstract utility method which unbinds events fired FROM this store
+     *
+     * @private
+     */
+	unbindStoreEvents: function() {
+		Ext.raise('CesiumExt.data.store.BaseStore.unbindStoreEvents() must be implemented.');
+	},
+	
+<span id='CesiumExt-data-store-BaseStore-method-bindCesiumCollectionEvents'>	/**
+</span>     * An abstract utility method which binds collection events fired FROM the 
+     * Cesium Collection associated to this store
+     *
+     * @private
+     */
+    bindCesiumCollectionEvents: function() {
+		Ext.raise('CesiumExt.data.store.BaseStore.bindCesiumCollectionEvents() must be implemented.');
+	},
+	
+<span id='CesiumExt-data-store-BaseStore-method-unbindCesiumCollectionEvents'>	/**
+</span>     * An abstract utility method which unbinds collection events fired FROM the 
+     * Cesium Collection associated to this store
+     *
+     * @private
+     */
+    unbindCesiumCollectionEvents: function() {
+		Ext.raise('CesiumExt.data.store.BaseStore.unbindCesiumCollectionEvents() must be implemented.');
+	},
+	
+<span id='CesiumExt-data-store-BaseStore-method-getRecordByCesiumObject'>	/**
+</span>     * Get the record for the related Cesium Object.
+     *
+     * @param {Object} cesiumObject The CesiumObject to get a model instance for.
+     * @return {Ext.data.Model} The corresponding model instance or undefined if
+     *     not found.
+     */
+    getRecordByCesiumObject: function(cesiumObject) {
+        var index = this.findBy(function(r) {
+            return r.cesiumObject === cesiumObject;
+        });
+        if (index &gt; -1) {
+            return this.getAt(index);
+        }
+    },
+	
+<span id='CesiumExt-data-store-BaseStore-method-loadRawData'>	/**
+</span>     * @inheritdoc
+     *
+     * The event firing behaviour of Ext.4.1 is reestablished here. See also:
+     * [This discussion on the Sencha forum](http://www.sencha.com/forum/
+     * showthread.php?253596-beforeload-is-not-fired-by-loadRawData).
+     */
+	 
+    loadRawData: function(data, append) {
+        var me = this;
+        var result = me.proxy.reader.read(data);
+        var records = result.records;
+
+        if (result.success) {
+            me.totalCount = result.total;
+            me.loadRecords(records, append ? me.addRecordsOptions : undefined);
+            me.fireEvent('load', me, records, true);
+        }
+    },
+	
+<span id='CesiumExt-data-store-BaseStore-method-loadRecords'>	/**
+</span>     * Overload loadRecords to set a flag if `addRecords` is `true` in the load
+     * options. ExtJS does not pass the load options to &quot;load&quot; callbacks, so
+     * this is how we provide that information to `onLoad`.
+     *
+     * @param {Ext.data.Model[]} records The array of records to load.
+     * @param {Object} options The loading options.
+     * @param {Boolean} [options.addRecords=false] Pass `true` to add these
+     *     records to the existing records, `false` to remove the Store's
+     *     existing records first.
+     * @private
+     */
+    loadRecords: function(records, options) {
+        if (options &amp;&amp; options.addRecords) {
+            this._addRecords = true;
+        }
+        this.callParent(arguments);
+    },
+	
+	
+<span id='CesiumExt-data-store-BaseStore-method-destroy'>	 /**
+</span>     * @inheritdoc
+     */
+    destroy: function() {
+		var me = this;
+		//unbind events
+		unbindCesiumCollectionEvents
+		unbindStoreEvents();
+		
+		delete this.cesiumCollection;
+	}
+});</pre>
+</body>
+</html>

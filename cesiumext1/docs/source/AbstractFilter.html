@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019-Present CesiumExtJS
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+
+<span id='CesiumExt-format-filter-AbstractFilter'>/**
+</span> * Abstract class normally only used for creating subclasses and not instantiated in apps.
+ *
+ * @class CesiumExt.format.filter.AbstractFilter
+ *
+ * @author Paulo Sergio SAMPAIO de ARAGAO
+ */
+Ext.define('CesiumExt.format.filter.AbstractFilter', {
+    extend: 'Ext.Base',
+	requires: [
+		'CesiumExt.format.WFSRequest'
+	],
+	
+	config: {
+<span id='CesiumExt-format-filter-AbstractFilter-cfg-tagName'>		/**
+</span>		* The xml tag name
+		* @cfg {String} tagName
+		*/
+		tagName: null
+	},
+	
+	statics: {
+<span id='CesiumExt-format-filter-AbstractFilter-static-property-TPL'>		TPL: 
+</span>			'&lt;Filter xmlns=&quot;{0}&quot;&gt;' +
+				'{1}' +
+			'&lt;/Filter&gt;'	
+	},
+	
+<span id='CesiumExt-format-filter-AbstractFilter-method-constructor'>	/**
+</span>	* The constructor method.
+	*
+	* @param {String} tagName The XML tag name for this filter.
+	*/
+	constructor: function(config) {
+		var me = this;
+		config = config || {};
+		me.callParent([config]);
+		me.initConfig(config);
+    },
+	
+<span id='CesiumExt-format-filter-AbstractFilter-method-encodeFilterAsXmlString'>	/**
+</span>	* Encode the filter in a xml string format
+	*/
+	encodeFilterAsXmlString: function() {
+		var me = this;
+		var result = Ext.String.format(
+			CesiumExt.format.filter.AbstractFilter.TPL,
+			CesiumExt.format.WFSRequest.OGCNS,
+			me.toString()
+		);
+		return encodeURIComponent(result);
+	}
+});</pre>
+</body>
+</html>
